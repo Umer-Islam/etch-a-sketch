@@ -1,5 +1,5 @@
 let square = document.querySelector(".grid");
-
+let color = 'black'
 document.addEventListener("DOMContentLoaded", function () {
   createBoard(4);
   let play = document.querySelector("#play");
@@ -18,9 +18,7 @@ function createBoard(size) {
     let div = document.createElement("div");
     square.appendChild(div);
     // div.style.border = "solid black .1px";
-    div.addEventListener("mouseover", function () {
-      div.style.backgroundColor = "red"; // Change the background color on hover
-    });
+    div.addEventListener("mouseover", colorDiv);
   }
   
 }
@@ -30,11 +28,34 @@ function gridSize() {
   let message = document.querySelector(".message");
   if (input === "" || input < 1 || input > 100 || input === null) {
     if (input === "") console.log("empty");
-    message.innerHTML = "Please enter a number between  (1-100)";
+    message.innerHTML = "Please enter a number between  (1-100)" ;
+    message.style.color = 'red'
+    message.style.backgroundColor= '#555555'
+    message.style.fontFamily = 'Verdana'
   } else {
     message.textContent = `size of the board: ${input}x${input}`;
+    message.style.color = 'yellowgreen'
+    message.style.backgroundColor = 'gray'
+    // message.style.display = 'inline-block'
+
     console.log(input);
     
     return input;
   }
+}
+
+function colorDiv(color){
+  
+      if(color === "random"){
+          this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`
+      }
+      else{
+          this.style.backgroundColor = 'black'
+      }
+  
+}
+
+function resetBoard(){
+  let divs = document.querySelectorAll("div")
+  divs.forEach((div) => div.style.backgroundColor = "white")
 }
